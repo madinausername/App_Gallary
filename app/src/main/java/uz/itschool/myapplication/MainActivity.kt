@@ -1,5 +1,6 @@
 package uz.itschool.gallary
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -10,6 +11,7 @@ import uz.itschool.myapplication.R
 class MainActivity : AppCompatActivity(){
     var index=0
     var array_list:MutableList<Int> = mutableListOf()
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity(){
 
         image_1.setOnClickListener {
             full_screen_image.setImageResource(array_list[index])
+            linearLayout.visibility=View.GONE
         }
 
         right_button.setOnClickListener {
@@ -39,6 +42,7 @@ class MainActivity : AppCompatActivity(){
                 index=0
             }
             full_screen_image.setImageResource(array_list[index])
+            linearLayout.visibility=View.GONE
         }
 
 
@@ -46,10 +50,14 @@ class MainActivity : AppCompatActivity(){
             if(index <= array_list.size-1) {
                 index--
             }
+            else if(index==0){
+                index=array_list.size-2
+            }
             else{
                 index=array_list.size-2
             }
             full_screen_image.setImageResource(array_list[index])
+            linearLayout.visibility=View.GONE
         }
     }
 }
